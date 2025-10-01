@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% set action = app.current_route == 'app_admin_author_new' ? 'Ajout' : 'Edition' %}
+
+{% block title %}{{ action }} d'auteur{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <script>
+        if (history.length <= 1) {
+            document.getElementById('back-btn').style.display = 'none';
+        }
+    </script>
+
+    <div class="w-50 m-auto">
+    
+        <div class="example-wrapper py-4">
+            <h1>{{ action }} d'auteur</h1>
+        
+            {{ form_start(form) }}
+            {{ form_row(form.name, {label: 'Nom'}) }}
+            {{ form_row(form.dateOfBirth, {label: 'Date de naissance'}) }}
+            {{ form_row(form.dateOfDeath, {label: 'Date de décès'}) }}
+            {{ form_row(form.nationality, {label: 'Nationalité'}) }}
+            {{ form_row(form.books, {label: 'Livres'}) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-primary"> Envoyer </button>
+            <a href="javascript:history.back()" class="btn btn-secondary" id="back-btn">Retour</a>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

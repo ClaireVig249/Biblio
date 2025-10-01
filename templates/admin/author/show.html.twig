@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail d'un auteur{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+    <div class="example-wrapper py-4">
+    {% if authors is not null %}
+    <h1>Auteur : </h1>
+        <div class="card mb-1 m-auto">
+            <div class="card-body">
+                <div class="card-title d-flex justify-content-between">
+                    <h4 class="mb-1">{{ authors.name }}</h4>
+                    <small class="text-muted">Identifiant : {{ authors.id }}</small>
+                </div>
+                <div class="d-flex justify-content-between card-text">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Date de naissance : {{ authors.dateOfBirth|date('d M Y') }}</li>
+                        <li class="list-group-item">Date de décès : {{ authors.dateOfDeath is not null ? authors.dateOfDeath|date('d M Y') : ' - ' }}</li>
+                    </ul>
+
+                    {% if authors.nationality is not null %}
+                        <p><small>Nationalité : {{ authors.nationality }}</small></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <a href="{{ path('app_admin_author_edit', {id: authors.id}) }}" class="btn btn-warning my-4"> Modifier cet auteur </a>
+    {% else %}
+        <div>
+            <h2>Auteur non trouvé.</h2>
+            <h4>Ajouter un nouvel auteur ?</h4>
+        </div>
+    {% endif %}    
+    <a href="{{ path('app_admin_author_new') }}" class="btn btn-primary"> Ajouter un nouvel auteur </a>
+    <a href="{{ path('app_admin_author_index') }}" class="btn btn-secondary"> Retour </a>
+</div>
+{% endblock %}

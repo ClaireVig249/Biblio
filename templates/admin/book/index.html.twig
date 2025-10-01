@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de livres{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+    <div class="example-wrapper py-4">
+    {% if books is not null %}
+        <h1>Liste de livres</h1>
+        <ul class="list-group list-group-flush">
+            {% for book in books %}
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <div class="card-title d-flex justify-content-between">
+                        <a href="{{ path('app_admin_book_show', {id: book.id} ) }}" class="stretched-link link-dark">
+                            <h4 class="mb-1">{{ book.title }}</h4>
+                            <small class="text-muted">Identifiant : {{ book.id }}</small>
+                            {% if book.authors is not null %}
+                                {% for author in book.authors %}
+                                    <h5>Auteur(s): {{ author.name }}</h5>
+                                {% endfor %}
+                                
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h2>Aucun livre trouvé.... </h2>
+        <a href=" {{ path('app_admin_book_new') }}" class="btn btn-primary">Créer un livre</a>
+    {% endif %}
+
+    </br>
+        
+    {{ pagerfanta(books) }}
+
+    </div>
+{% endblock %}
