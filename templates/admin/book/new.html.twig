@@ -12,12 +12,13 @@
         if (history.length <= 1) {
             document.getElementById('back-btn').style.display = 'none';
         }
+    </script>
 
     <div class="w-50 m-auto">
-    
+
         <div class="example-wrapper py-4">
             <h1>Ajout de livre</h1>
-        
+
             {{ form_start(form) }}
             {{ form_row(form.title, {label: 'Nom'}) }}
             {{ form_row(form.isbn, {label: 'Numéro ISBN'}) }}
@@ -32,7 +33,7 @@
             {{ form_widget(form) }}
             <button type="submit" class="btn btn-primary">Envoyer</button>
             <a href="javascript:history.back()" class="btn btn-secondary" id="back-btn">Retour</a>
-            
+
             {{ form_end(form) }}
         </div>
     </div>
