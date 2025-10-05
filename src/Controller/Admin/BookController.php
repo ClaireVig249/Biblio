@@ -37,9 +37,11 @@ final class BookController extends AbstractController
     #[Route('/{id}/edit', name: self::APP_BOOK.'_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Book $book, Request $request, EntityManagerInterface $em): Response
     {
-        /*if ($book) {
-            $this->denyAccessUnlessGranted('book.is_creator', $book);
-        }*/
+        if ($book) {
+            $this->denyAccessUnlessGranted('ROLE_EDITION_LIVRE', $book);
+        }else{
+            $this->denyAccessUnlessGranted('ROLE_AJOUT_LIVRE');
+        }
 
         $book ??= new Book();
         $form = $this->createForm(BookType::class, $book);

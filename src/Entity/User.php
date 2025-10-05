@@ -47,6 +47,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private string $password = '';
 
+    #[ORM\Column(nullable:true)]
+    private ?\DateTimeImmutable $lastLoginAt = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -163,4 +167,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getLastLoginAt(): ?\DateTimeImmutable
+    {
+        return $this->lastLoginAt;
+    }
+
+    public function setLastLoginAt(?\DateTimeImmutable $lastLoginAt): void
+    {
+        $this->lastLoginAt = $lastLoginAt;
+    }
+
+
 }
